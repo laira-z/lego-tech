@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CardItemComponent } from '../card-item/card-item.component';
 
 @Component({
@@ -8,4 +8,6 @@ import { CardItemComponent } from '../card-item/card-item.component';
   templateUrl: './card-list.component.html',
   styleUrl: './card-list.component.css',
 })
-export class CardListComponent {}
+export class CardListComponent {
+  @Input() list!: string[];
+}
