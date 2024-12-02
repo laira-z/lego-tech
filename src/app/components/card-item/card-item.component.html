@@ -1,15 +1,16 @@
 <div class="card card-compact bg-base-100 w-96 shadow-xl">
-  <figure>
-    <img
-      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-      alt="Shoes"
-    />
-  </figure>
+  <a routerLink="/details">
+    <figure>
+      <img
+        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+        alt="Shoes"
+      /></figure
+  ></a>
   <div class="card-body">
     <h2 class="card-title">{{ title }}</h2>
     <p>If a dog chews shoes whose shoes does he choose?</p>
     <div class="card-actions justify-end">
-      <button class="btn btn-primary">Buy Now</button>
+      <button class="btn btn-primary" (click)="goDetails()">Buy Now</button>
     </div>
   </div>
 </div>
