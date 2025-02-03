@@ -1,4 +1,8 @@
-<form class="flex flex-col m-3 gap-5 text-start pl-10" formGroup="loginForm">
+<form
+  class="flex flex-col m-3 gap-5 text-start pl-10"
+  [formGroup]="loginForm"
+  (submit)="Submit()"
+>
   <label for="name">Name:</label>
   <input
     id="name"
