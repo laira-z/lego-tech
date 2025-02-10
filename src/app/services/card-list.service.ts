@@ -10,8 +10,12 @@ export class CardListService {
 
   async getAllProducts(): Promise<ProductProps[] | null> {
     let data: String[];
-    fetch('legotech.koyeb.app/products')
-      .then((data) => data.json())
+    fetch('https://legotech.koyeb.app/products')
+      .then((data) => {
+        debugger;
+        data.json();
+        return data.json();
+      })
       .then((res) => {
         data = res;
         return data;
