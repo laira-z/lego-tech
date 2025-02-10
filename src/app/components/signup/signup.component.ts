@@ -34,7 +34,8 @@ export class SignupComponent {
 
   onSubmit() {
     if (this.signupForm.valid) {
-      console.log(this.signupForm.value);
+      const { terms, ...userData } = this.signupForm.value; // Remove 'terms'
+      console.log(userData); // Aqui você enviaria os dados para a API
     }
   }
 }
