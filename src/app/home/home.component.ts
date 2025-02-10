@@ -8,19 +8,4 @@ import { CardListComponent } from '../components/card-list/card-list.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent {
-  list = [
-    'test1',
-    'test2',
-    'test3',
-    'test4',
-    'test1',
-    'test2',
-    'test3',
-    'test4',
-    'test1',
-    'test2',
-    'test3',
-    'test4',
-  ];
-}
+export class HomeComponent {}

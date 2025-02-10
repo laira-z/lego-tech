@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './card-item.component.css',
 })
 export class CardItemComponent {
-  @Input() title!: string;
+  @Input() title!: String;
 }
