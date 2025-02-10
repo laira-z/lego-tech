@@ -1,43 +1,36 @@
 import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
-
+import { SigninComponent } from '../signin/signin.component';
+import { SignupComponent } from '../signup/signup.component';
+import { trigger, transition, style, animate } from '@angular/animations';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [SigninComponent, SignupComponent, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
+  animations: [
+    trigger('flipAnimation', [
+      transition(':enter', [
+        style({ transform: 'rotateY(90deg)', opacity: 0 }),
+        animate(
+          '300ms ease-out',
+          style({ transform: 'rotateY(0)', opacity: 1 })
+        ),
+      ]),
+      transition(':leave', [
+        animate(
+          '200ms ease-in',
+          style({ transform: 'rotateY(-90deg)', opacity: 0 })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class LoginComponent {
-  loginForm = new FormGroup({
-    name: new FormControl('', [Validators.minLength(5), Validators.required]),
-    email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', [
-      Validators.minLength(4),
-      Validators.required,
-    ]),
-  });
+  isSignin = true;
 
-  logar() {
-    console.log('Entrou!!');
-    console.log(this.loginForm);
-  }
-  Submit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.loginForm.value);
-  }
-
-  userForm = new FormGroup({
-    username: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
-  });
-
-  onSubmit() {
-    console.log(this.userForm.value);
+  toggleForm() {
+    this.isSignin = !this.isSignin;
   }
 }

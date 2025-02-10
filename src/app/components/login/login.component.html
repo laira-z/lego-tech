@@ -1,49 +1,14 @@
-<form
-  class="flex flex-col m-3 gap-5 text-start pl-10"
-  [formGroup]="loginForm"
-  (submit)="Submit()"
->
-  <label for="name">Name:</label>
-  <input
-    id="name"
-    type="text"
-    class="flex p-3 bg-slate-700 rounded-lg w-1/2 text-cyan-300"
-    formControlName="name"
-    placeholder="name"
-  />
-  <label for="email">Email:</label>
-  <input
-    id="email"
-    type="text"
-    class="flex p-3"
-    placeholder="email"
-    class="flex p-3 bg-slate-700 rounded-lg w-1/2 text-cyan-300"
-    formControlName="email"
-  />
-  <label for="password">Senha:</label>
+<div class="w-screen min-h-screen flex items-center bg-gray-100">
+  <div class="w-full shadow-sm">
+    <!-- Alternar entre os formulários de Login (Signin) e Cadastro (Signup) -->
+    <div *ngIf="isSignin; else signupTemplate" @flipAnimation>
+      <app-signin (switchToSignup)="toggleForm()"></app-signin>
+    </div>
 
-  <input
-    id="password"
-    type="text"
-    class="flex p-3"
-    placeholder="password"
-    class="flex p-3 bg-slate-700 rounded-lg w-1/2 text-cyan-300"
-    formControlName="password"
-  />
-  <!-- <button
-    class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg max-w-2xl"
-    type="button"
-    items-center
-    (click)="logar()"
-  >
-    Entrar
-  </button> -->
-  <p>Complete the form to enable button.</p>
-  <button
-    type="submit"
-    [disabled]="!loginForm.valid"
-    class="bg-purple-400 disabled:bg-red-300"
-  >
-    Submit
-  </button>
-</form>
+    <ng-template #signupTemplate>
+      <div @flipAnimation>
+        <app-signup (switchToSignin)="toggleForm()"></app-signup>
+      </div>
+    </ng-template>
+  </div>
+</div>
