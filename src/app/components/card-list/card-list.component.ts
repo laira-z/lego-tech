@@ -19,9 +19,9 @@ export class CardListComponent {
   onInit() {
     this.service.getAllProducts().then((res) => {
       if (res) {
-        res.map((item) => this.list.push(item));
+        this.list = res;
+        console.log(res);
       }
     });
-    console.log('logou');
   }
 }

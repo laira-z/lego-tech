@@ -1,3 +1,3 @@
 export type ProductProps = {
-  title: String;
+  name: String;
 };

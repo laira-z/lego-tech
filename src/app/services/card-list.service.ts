@@ -8,15 +8,12 @@ type ProductProps = {
 export class CardListService {
   constructor() {}
 
-  async getAllProducts(): Promise<ProductProps[] | null> {
-    let data: String[];
-    fetch('legotech.koyeb.app/products')
-      .then((data) => data.json())
-      .then((res) => {
-        data = res;
-        return data;
-      });
-
-    return null;
+  getAllProducts(): Promise<any> {
+    return fetch('https://legotech.koyeb.app/products').then((response) => {
+      if (!response.ok) {
+        throw new Error(`Erro: ${response.status}`);
+      }
+      return response.json(); // Certifique-se de que a resposta está sendo convertida para JSON
+    });
   }
 }
