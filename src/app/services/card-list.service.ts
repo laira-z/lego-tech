@@ -13,7 +13,7 @@ export class CardListService {
       if (!response.ok) {
         throw new Error(`Erro: ${response.status}`);
       }
-      return response.json(); // Certifique-se de que a resposta está sendo convertida para JSON
+      return response.json();
     });
   }
 }
