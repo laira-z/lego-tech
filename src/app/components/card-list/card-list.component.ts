@@ -20,6 +20,7 @@ export class CardListComponent {
     this.service.getAllProducts().then((res) => {
       if (res) {
         this.list = res;
+        this.list[0].stock_quantity = 0;
         console.log(res);
       }
     });

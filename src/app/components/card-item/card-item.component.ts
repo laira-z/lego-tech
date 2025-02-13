@@ -1,11 +1,16 @@
 import { Component, Input } from '@angular/core';
 import { ProductProps } from '../../types/ProductProps';
-import { NgOptimizedImage } from '@angular/common';
+import {
+  CommonModule,
+  CurrencyPipe,
+  NgOptimizedImage,
+  TitleCasePipe,
+} from '@angular/common';
 
 @Component({
   selector: 'app-card-item',
   standalone: true,
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, CurrencyPipe, TitleCasePipe, CommonModule],
   templateUrl: './card-item.component.html',
   styleUrl: './card-item.component.css',
 })
