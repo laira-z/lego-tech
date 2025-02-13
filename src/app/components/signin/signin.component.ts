@@ -38,6 +38,7 @@ export class SigninComponent {
   onSubmit() {
     if (this.signinForm.valid) {
       console.log(this.signinForm.value); // Você pode fazer a chamada à API aqui
+      this.signinForm.reset();
     } else {
       console.log('Formulário inválido');
     }

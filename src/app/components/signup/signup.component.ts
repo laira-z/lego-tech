@@ -36,6 +36,7 @@ export class SignupComponent {
     if (this.signupForm.valid) {
       const { terms, ...userData } = this.signupForm.value; // Remove 'terms'
       console.log(userData); // Aqui você enviaria os dados para a API
+      this.signupForm.reset();
     }
   }
 }
