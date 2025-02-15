@@ -3,16 +3,17 @@ import { ActivatedRoute } from '@angular/router';
 import { CardListService } from '../../services/card-list.service';
 import { CardItemComponent } from '../card-item/card-item.component';
 import { ProductProps } from '../../types/ProductProps';
+import { DetailProductComponent } from '../detail-product/detail-product.component';
 
 @Component({
   selector: 'app-info-details',
   standalone: true,
-  imports: [CardItemComponent],
+  imports: [DetailProductComponent],
   templateUrl: './info-details.component.html',
   styleUrl: './info-details.component.css',
 })
 export class InfoDetailsComponent implements OnInit {
-  testId!: number;
+  id!: number;
   product!: ProductProps;
   constructor(
     private router: ActivatedRoute,
@@ -21,11 +22,9 @@ export class InfoDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.params.subscribe((params) => {
-      this.testId = Number(params['id']);
-      console.log('Test ID:', this.testId);
-      this.service.getInfoDetails(this.testId).subscribe((item) => {
+      this.id = Number(params['id']);
+      this.service.getInfoDetails(this.id).subscribe((item) => {
         this.product = item;
-        console.log(this.product);
       });
     });
   }
