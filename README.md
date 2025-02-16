@@ -1,6 +1,6 @@
 # LegoTech angular
 
-"Este projeto implementa uma API de e-commerce para a loja LegoTech, especializada em produtos LEGO."
+"Este projeto tem como objetivo criar uma aplicação web para a loja fictícia LegoTech, que oferece uma interface responsiva e interativa para visualização de produtos Lego, cadastro de usuários, login, gerenciamento de carrinho de compras e exibição de compras realizadas."
 
 O frontend da aplicação foi desenvolvido com Angular e o backend foi feito em Nodejs e esta hospedado em https://legotech.koyeb.app/
 
