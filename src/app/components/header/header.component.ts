@@ -10,18 +10,30 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
-  isAuthenticated = false;
-  qntCart = 6;
+  qntCart: number = 0;
+  isAuthenticated: boolean = false;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.authService.isAuthenticated$.subscribe((authStatus) => {
-      this.isAuthenticated = authStatus;
+    this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
+      this.isAuthenticated = isAuthenticated;
+      if (isAuthenticated) {
+        this.loadCartQuantity();
+      }
     });
   }
-
   logout(): void {
     this.authService.logout();
+  }
+  loadCartQuantity(): void {
+    this.authService.getCartQuantity().subscribe({
+      next: (response) => {
+        this.qntCart = response.quantity;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar quantidade do carrinho', err);
+      },
+    });
   }
 }
