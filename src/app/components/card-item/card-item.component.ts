@@ -30,6 +30,7 @@ export class CardItemComponent {
     this.cartService.addToCart(productId, quantity).subscribe({
       next: (response) => {
         console.log('Item adicionado ao carrinho:', response.message);
+        // A quantidade do carrinho já será atualizada automaticamente no HeaderComponent
       },
       error: (error) => {
         console.error('Erro ao adicionar ao carrinho:', error);

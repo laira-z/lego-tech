@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,30 +11,35 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
-  qntCart: number = 0;
-  isAuthenticated: boolean = false;
+  isAuthenticated = false;
+  qntCart = 0;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
-    this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
-      this.isAuthenticated = isAuthenticated;
-      if (isAuthenticated) {
-        this.loadCartQuantity();
+    this.authService.isAuthenticated$.subscribe((authStatus) => {
+      this.isAuthenticated = authStatus;
+      if (authStatus) {
+        this.updateCartQuantity();
       }
     });
+
+    // Inscreva-se no cartQuantity$ para atualizar a quantidade do carrinho dinamicamente
+    this.cartService.cartQuantity$.subscribe((quantity) => {
+      this.qntCart = quantity;
+    });
   }
+
+  updateCartQuantity(): void {
+    this.cartService.getCartQuantity().subscribe((quantity) => {
+      this.qntCart = quantity;
+    });
+  }
+
   logout(): void {
     this.authService.logout();
-  }
-  loadCartQuantity(): void {
-    this.authService.getCartQuantity().subscribe({
-      next: (response) => {
-        this.qntCart = response.quantity;
-      },
-      error: (err) => {
-        console.error('Erro ao carregar quantidade do carrinho', err);
-      },
-    });
   }
 }
