@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { bootstrapAirplane } from '@ng-icons/bootstrap-icons';
-import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +21,9 @@ export class AppComponent {
 
   constructor(private router: Router) {
     this.router.events.subscribe(() => {
-      this.isLoginPage = this.router.url === '/login';
+      this.isLoginPage =
+        this.router.url.includes('/login') ||
+        this.router.url.includes('/signup');
     });
   }
 }

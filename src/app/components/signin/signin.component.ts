@@ -5,26 +5,24 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { SignupComponent } from '../signup/signup.component';
 import { CommonModule } from '@angular/common';
+import { RouterLink, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signin',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './signin.component.html',
-  styleUrl: './signin.component.css',
+  styleUrls: ['./signin.component.css'],
 })
 export class SigninComponent {
-  @Output() switchToSignup = new EventEmitter<void>();
-
-  signUp() {
-    this.switchToSignup.emit();
-  }
-
   signinForm: FormGroup;
 
-  constructor() {
+  constructor(
+    private authService: AuthService,
+    private router: Router // Adicionando o Router para redirecionamento
+  ) {
     this.signinForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
@@ -34,13 +32,24 @@ export class SigninComponent {
     });
   }
 
-  // Função para enviar o formulário (a ser chamada ao clicar em "Sign in")
   onSubmit() {
     if (this.signinForm.valid) {
-      console.log(this.signinForm.value); // Você pode fazer a chamada à API aqui
-      this.signinForm.reset();
+      this.authService
+        .login(this.signinForm.value.email, this.signinForm.value.password)
+        .subscribe({
+          next: (response) => {
+            console.log('Login bem-sucedido', response);
+            // Redireciona para a página inicial após login bem-sucedido
+            this.router.navigate(['/']);
+          },
+          error: (error) => {
+            console.log('Erro no login', error);
+            alert('Erro ao fazer login. Verifique suas credenciais.');
+          },
+        });
     } else {
       console.log('Formulário inválido');
+      alert('Por favor, preencha todos os campos corretamente.');
     }
   }
 }
