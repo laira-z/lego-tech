@@ -1,17 +1,78 @@
 <div *ngIf="cartItems.length > 0; else emptyCart">
-  <div *ngFor="let item of cartItems">
-    <p>Produto: {{ item.productId }}</p>
-    <p>Quantidade: {{ item.quantity }}</p>
-    <button (click)="removeItem(item.productId)" class="btn btn-error">
-      Remover
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+  >
+    <div
+      *ngFor="let item of cartItems"
+      class="card bg-base-100 shadow-lg rounded-lg p-4"
+    >
+      <a [routerLink]="['/infoDetails', item.productId]" class="block">
+        <figure class="flex justify-center">
+          <img
+            [src]="item.imageUrl"
+            class="h-40 w-40 object-cover rounded-md"
+            alt="{{ item.description }}"
+          />
+        </figure>
+      </a>
+
+      <div class="card-body flex flex-col justify-between">
+        <h2 class="text-lg font-semibold truncate">
+          {{ item.name | titlecase }}
+        </h2>
+        <p class="text-sm text-gray-500 truncate">{{ item.description }}</p>
+
+        <!-- Seção de Quantidade e Preço -->
+        <div class="flex items-center justify-between mt-2">
+          <span class="text-lg font-bold text-primary">
+            {{ item.price | currency : "BRL" }}
+          </span>
+          <div class="flex items-center gap-2">
+            <button
+              class="btn btn-sm btn-secondary"
+              (click)="decreaseQuantity(item)"
+            >
+              -
+            </button>
+            <span class="text-lg font-medium">{{ item.quantity }}</span>
+            <button
+              class="btn btn-sm btn-secondary"
+              (click)="increaseQuantity(item)"
+            >
+              +
+            </button>
+          </div>
+        </div>
+
+        <!-- Preço total do item -->
+        <p class="text-sm text-gray-600 mt-1">
+          Total:
+          <strong>{{ item.price * item.quantity | currency : "BRL" }}</strong>
+        </p>
+
+        <!-- Ações -->
+        <div class="flex justify-between mt-4">
+          <button class="btn btn-error btn-sm" (click)="removeFromCart(item)">
+            Remover
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botão para finalizar a compra -->
+  <div class="flex justify-end mt-6">
+    <button class="btn btn-success text-lg px-6" (click)="finalizePurchase()">
+      Finalizar Compra ({{ getTotalPrice() | currency : "BRL" }})
     </button>
   </div>
-  <button (click)="clearCart()" class="btn btn-warning">Limpar Carrinho</button>
-  <button (click)="finalizePurchase()" class="btn btn-success">
-    Finalizar Compra
-  </button>
 </div>
 
+<!-- Se o carrinho estiver vazio -->
 <ng-template #emptyCart>
-  <p>Seu carrinho está vazio.</p>
+  <div class="text-center p-10">
+    <h2 class="text-2xl font-semibold">Seu carrinho está vazio! 🛒</h2>
+    <p class="text-gray-500 mt-2">Adicione alguns produtos para continuar.</p>
+    <a routerLink="/" class="btn btn-primary mt-4">Ver produtos</a>
+  </div>
 </ng-template>
