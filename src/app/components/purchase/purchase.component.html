@@ -1,0 +1,29 @@
+<div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
+  <h2 class="text-3xl font-semibold mb-6 text-center">Minhas Compras</h2>
+
+  <div *ngIf="purchases.length === 0" class="text-center">
+    <p class="text-gray-500">Nenhuma compra encontrada.</p>
+  </div>
+
+  <div *ngFor="let purchase of purchases" class="border-b pb-6 mb-6">
+    <div class="flex justify-between items-center mb-4">
+      <p class="text-lg font-semibold">Pedido ID: {{ purchase.id }}</p>
+      <p class="text-xl text-green-600">R$ {{ purchase.totalAmount }}</p>
+    </div>
+
+    <div class="text-sm text-gray-500 mb-4">
+      <p>
+        <strong>Data:</strong>
+        {{ purchase.createdAt | date : "dd/MM/yyyy HH:mm" }}
+      </p>
+    </div>
+
+    <div *ngFor="let item of purchase.items" class="border-t pt-4 mt-4">
+      <div class="flex justify-between items-center">
+        <p class="font-medium">{{ item.product.name }}</p>
+        <p class="text-gray-600">R$ {{ item.price_at_time }}</p>
+      </div>
+      <p class="text-gray-500">Quantidade: {{ item.quantity }}</p>
+    </div>
+  </div>
+</div>
