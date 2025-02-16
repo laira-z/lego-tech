@@ -4,7 +4,7 @@
   >
     <div
       *ngFor="let item of cartItems"
-      class="card bg-base-100 shadow-lg rounded-lg p-4"
+      class="card bg-gray-700 text-zinc-100 shadow-lg rounded-lg p-4"
       tabindex="0"
     >
       <a [routerLink]="['/infoDetails', item.productId]" class="block">
@@ -21,16 +21,15 @@
         <h2 class="text-lg font-semibold truncate">
           {{ item.name | titlecase }}
         </h2>
-        <p class="text-sm text-gray-500 truncate">{{ item.description }}</p>
+        <p class="text-sm text-zinc-50 truncate">{{ item.description }}</p>
 
-        <!-- Seção de Quantidade e Preço -->
         <div class="flex items-center justify-between mt-4">
-          <span class="text-lg font-bold text-primary">
+          <span class="text-lg font-medium text-sky-500">
             {{ item.price | currency : "BRL" }}
           </span>
           <div class="flex items-center gap-4">
             <button
-              class="btn btn-sm btn-secondary px-3"
+              class="btn btn-sm btn-warning px-3"
               (click)="decreaseQuantity(item)"
               aria-label="Diminuir quantidade"
             >
@@ -38,7 +37,7 @@
             </button>
             <span class="text-lg font-medium">{{ item.quantity }}</span>
             <button
-              class="btn btn-sm btn-secondary px-3"
+              class="btn btn-sm btn-success px-3"
               (click)="increaseQuantity(item)"
               aria-label="Aumentar quantidade"
             >
@@ -47,12 +46,10 @@
           </div>
         </div>
 
-        <!-- Preço total do item -->
-        <p class="text-sm text-gray-600 mt-2">
+        <p class="text-sm text-gray-500 mt-2">
           Total: <strong>{{ getItemTotal(item) | currency : "BRL" }}</strong>
         </p>
 
-        <!-- Ações -->
         <div class="flex justify-between mt-4">
           <button class="btn btn-error btn-sm" (click)="removeFromCart(item)">
             Remover
@@ -62,8 +59,7 @@
     </div>
   </div>
 
-  <!-- Botão para finalizar a compra -->
-  <div class="flex justify-center mt-10">
+  <div class="flex justify-center mt-10 mb-20">
     <button
       class="btn btn-success text-lg px-8 py-3"
       (click)="finalizePurchase()"
@@ -74,11 +70,10 @@
   </div>
 </div>
 
-<!-- Se o carrinho estiver vazio -->
 <ng-template #emptyCart>
-  <div class="text-center p-10">
+  <div class="text-center p-10 text-zinc-100">
     <h2 class="text-2xl font-semibold">Seu carrinho está vazio! 🛒</h2>
-    <p class="text-gray-500 mt-2">Adicione alguns produtos para continuar.</p>
+    <p class="mt-2">Adicione alguns produtos para continuar.</p>
     <a routerLink="/" class="btn btn-primary mt-4">Ver produtos</a>
   </div>
 </ng-template>

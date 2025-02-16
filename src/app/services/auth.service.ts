@@ -67,7 +67,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     this.isAuthenticatedSubject.next(false);
-    this.router.navigate(['/login']); // Redireciona para login após logout
+    this.router.navigate(['/']);
   }
 
   private setToken(token: string): void {

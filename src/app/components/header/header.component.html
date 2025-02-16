@@ -1,11 +1,9 @@
 <div class="navbar bg-gray-900 pr-4 pl-4">
   <div class="flex-1">
-    <a
-      href="/"
-      class="flex items-center text-2xl font-semibold text-gray-900 dark:text-white"
-    >
+    <a href="/" class="flex items-center">
+      <!-- Logo responsiva -->
       <img
-        class="h-auto w-auto max-w-fit min-h-8 mr-2"
+        class="h-auto w-auto max-w-[180px] min-h-8 md:max-w-[300px] md:min-h-[50px] object-contain"
         src="/assets/logo.svg"
         alt="logo"
       />
@@ -19,7 +17,7 @@
           <div
             tabindex="0"
             role="button"
-            class="btn btn-ghost btn-circle border-custom-yellow"
+            class="btn btn-ghost btn-circle border-custom-yellow text-zinc-100"
           >
             <div class="indicator">
               <svg
@@ -49,10 +47,7 @@
           class="btn btn-ghost btn-circle avatar border-custom-yellow"
         >
           <div class="w-10 rounded-full">
-            <img
-              alt="User Avatar"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-            />
+            <img alt="User Avatar" src="/assets/person.svg" />
           </div>
         </div>
         <ul
@@ -67,8 +62,13 @@
     </ng-container>
 
     <ng-template #guestMenu>
-      <a href="/login" class="btn btn-primary">Entrar</a>
-      <a href="/signup" class="btn btn-secondary ml-2">Criar Conta</a>
+      <!-- Apenas um botão no mobile e dois no desktop -->
+      <a href="/login" class="btn btn-primary btn-sm md:btn-md">Entrar</a>
+      <a
+        href="/signup"
+        class="btn btn-secondary btn-sm md:btn-md ml-2 hidden md:inline-block content-center"
+        >Criar Conta</a
+      >
     </ng-template>
   </div>
 </div>

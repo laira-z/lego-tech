@@ -18,7 +18,6 @@ export class CartComponent {
     this.loadCart();
   }
 
-  // Carrega os itens do carrinho
   loadCart() {
     this.cartService.getCart().subscribe((items) => {
       this.cartItems = items;

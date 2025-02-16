@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject, map } from 'rxjs';
 import { CartItemProps } from '../types/CartItemProps';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,12 @@ export class CartService {
     new BehaviorSubject<number>(0); // Observable para a quantidade de itens no carrinho
   cartQuantity$ = this.cartQuantitySubject.asObservable(); // Observable que pode ser subscrito
 
-  constructor(private http: HttpClient) {
-    this.loadCart(); // Carrega a quantidade de itens ao inicializar
+  constructor(private http: HttpClient, private authService: AuthService) {
+    authService.isAuthenticated$.subscribe((authStatus) => {
+      if (authStatus) {
+        this.loadCart();
+      }
+    });
   }
 
   private getAuthHeaders(): HttpHeaders {

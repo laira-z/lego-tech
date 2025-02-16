@@ -24,12 +24,10 @@ export class HeaderComponent implements OnInit {
       this.isAuthenticated = authStatus;
       if (authStatus) {
         this.updateCartQuantity();
+        this.cartService.cartQuantity$.subscribe((quantity) => {
+          this.qntCart = quantity;
+        });
       }
-    });
-
-    // Inscreva-se no cartQuantity$ para atualizar a quantidade do carrinho dinamicamente
-    this.cartService.cartQuantity$.subscribe((quantity) => {
-      this.qntCart = quantity;
     });
   }
 
@@ -41,5 +39,12 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
+  }
+
+  mobileMenuOpen = false;
+
+  // Método para alternar a visibilidade do menu
+  toggleMobileMenu(): void {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
   }
 }
