@@ -1,7 +1,10 @@
 <div
   class="flex flex-wrap gap-4 flex-1 items-center justify-center m-4 max-w-5xl"
 >
-  @for (cardItem of list; track $index) {
-  <app-card-item [item]="cardItem" />
+  @for (cardItem of list; track cardItem.id) { @if (cardItem.stock_quantity > 0)
+  {
+  <app-card-item [item]="cardItem"></app-card-item>
+  } } @empty {
+  <p>Não há itens no carrinho.</p>
   }
 </div>
