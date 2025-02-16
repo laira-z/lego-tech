@@ -1,7 +1,8 @@
-<div class="bg-base-100 shadow-xl max-w-screen-2xl flex-1 p-4 flex">
-  <div class="w-3/6 h-1/2">
-    <figure>
+<div class="flex flex-col md:flex-row flex-1 gap-6">
+  <div class="w-full md:w-3/4 flex justify-center">
+    <figure class="w-full md:w-auto">
       <img
+        class="w-full md:w-[650px] h-auto object-cover"
         ngSrc="{{ product.image_url }}"
         height="650"
         width="650"
@@ -10,11 +11,29 @@
       />
     </figure>
   </div>
-  <div class="card-body">
-    <h2 class="card-title">{{ product.name }}</h2>
-    <p>{{ product.description }}</p>
-    <div class="card-actions justify-end">
-      <button class="btn btn-primary">{{ product.price }}</button>
+
+  <div class="flex flex-col gap-4 w-full md:w-auto h-full justify-between">
+    <h2 class="text-xl md:text-2xl font-bold">{{ product.name }}</h2>
+    <p class="text-lg">{{ product.description }}</p>
+
+    @if (product.stock_quantity > 0) {
+    <div>
+      <p class="text-success text-lg">Produto Disponível</p>
+      <span>Quantidade: {{ product.stock_quantity }}</span>
     </div>
+    } @else {
+    <div>
+      <p class="text-error text-lg">Produto Indisponível</p>
+      <p>{{ product.stock_quantity }}</p>
+    </div>
+    }
+
+    <button
+      class="btn btn-success flex items-center gap-2 p-3 md:px-6 md:py-3 text-white"
+    >
+      <img src="/assets/addCCart.svg" alt="" class="w-5 h-5" />
+      <span class="text-sm md:text-base uppercase">Adicionar ao carrinho</span>
+      <span class="text-sm md:text-lg font-bold">{{ product.price }}</span>
+    </button>
   </div>
 </div>
