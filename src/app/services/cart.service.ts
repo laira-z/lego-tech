@@ -68,7 +68,7 @@ export class CartService {
   finalizePurchase(): Observable<{ orderId: string }> {
     const headers = this.getAuthHeaders();
     return this.http.post<{ orderId: string }>(
-      `${this.baseUrl}/purchase`,
+      `${this.baseUrl}/cart/checkout`,
       {},
       { headers }
     );

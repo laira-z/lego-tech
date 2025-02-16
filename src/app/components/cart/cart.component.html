@@ -5,6 +5,7 @@
     <div
       *ngFor="let item of cartItems"
       class="card bg-base-100 shadow-lg rounded-lg p-4"
+      tabindex="0"
     >
       <a [routerLink]="['/infoDetails', item.productId]" class="block">
         <figure class="flex justify-center">
@@ -23,21 +24,23 @@
         <p class="text-sm text-gray-500 truncate">{{ item.description }}</p>
 
         <!-- Seção de Quantidade e Preço -->
-        <div class="flex items-center justify-between mt-2">
+        <div class="flex items-center justify-between mt-4">
           <span class="text-lg font-bold text-primary">
             {{ item.price | currency : "BRL" }}
           </span>
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-4">
             <button
-              class="btn btn-sm btn-secondary"
+              class="btn btn-sm btn-secondary px-3"
               (click)="decreaseQuantity(item)"
+              aria-label="Diminuir quantidade"
             >
               -
             </button>
             <span class="text-lg font-medium">{{ item.quantity }}</span>
             <button
-              class="btn btn-sm btn-secondary"
+              class="btn btn-sm btn-secondary px-3"
               (click)="increaseQuantity(item)"
+              aria-label="Aumentar quantidade"
             >
               +
             </button>
@@ -45,9 +48,8 @@
         </div>
 
         <!-- Preço total do item -->
-        <p class="text-sm text-gray-600 mt-1">
-          Total:
-          <strong>{{ item.price * item.quantity | currency : "BRL" }}</strong>
+        <p class="text-sm text-gray-600 mt-2">
+          Total: <strong>{{ getItemTotal(item) | currency : "BRL" }}</strong>
         </p>
 
         <!-- Ações -->
@@ -61,8 +63,12 @@
   </div>
 
   <!-- Botão para finalizar a compra -->
-  <div class="flex justify-end mt-6">
-    <button class="btn btn-success text-lg px-6" (click)="finalizePurchase()">
+  <div class="flex justify-center mt-10">
+    <button
+      class="btn btn-success text-lg px-8 py-3"
+      (click)="finalizePurchase()"
+      [disabled]="cartItems.length === 0"
+    >
       Finalizar Compra ({{ getTotalPrice() | currency : "BRL" }})
     </button>
   </div>

@@ -2,16 +2,18 @@
   class="card card-compact bg-custom-yellow w-60 h-80 gap-4 shadow-xl p-2 text-gray-600"
   *ngIf="item.stock_quantity > 0"
 >
-  <a href="infoDeatils/{{ item.id }}">
-    <figure>
-      <img
-        ngSrc="{{ item.image_url }}"
-        height="160"
-        width="160"
-        alt="{{ item.description }}"
-      />
-    </figure>
-  </a>
+  <div class="bg-gray-300">
+    <a href="infoDeatils/{{ item.id }}">
+      <figure>
+        <img
+          ngSrc="{{ item.image_url }}"
+          height="160"
+          width="160"
+          alt="{{ item.description }}"
+        />
+      </figure>
+    </a>
+  </div>
   <div class="card justify-between flex-1">
     <h2 class="card-title truncate">{{ item.name | titlecase }}</h2>
     <p class="truncate">{{ item.description }}</p>

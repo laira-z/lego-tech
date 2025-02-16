@@ -71,4 +71,7 @@ export class CartComponent {
       alert('Compra finalizada com sucesso!');
     });
   }
+  getItemTotal(item: any): number {
+    return item.price * item.quantity;
+  }
 }
