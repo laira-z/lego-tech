@@ -1,0 +1,191 @@
+<section class="bg-gray-900">
+  <div
+    class="flex flex-col items-center justify-center w-full min-h-screen px-6 py-8 mx-auto"
+  >
+    <a
+      href="#"
+      class="flex items-center mb-6 text-2xl font-semibold text-white"
+    >
+      <img
+        class="h-auto w-auto max-w-fit min-h-8 mr-2"
+        src="/assets/logo.svg"
+        alt="logo"
+      />
+    </a>
+    <!-- Card agora ocupa 100% da largura disponível e se adapta dinamicamente -->
+    <div
+      class="w-full max-w-lg sm:max-w-md p-6 bg-gray-800 rounded-lg shadow-lg border-gray-700"
+    >
+      <div class="space-y-4 sm:space-y-6 p-8">
+        <h1
+          class="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl"
+        >
+          Crie uma conta
+        </h1>
+        <form
+          [formGroup]="signupForm"
+          (ngSubmit)="onSubmit()"
+          class="space-y-4 md:space-y-6"
+        >
+          <!-- Campo de nome -->
+          <div>
+            <label for="name" class="block mb-2 text-sm font-medium text-white"
+              >Seu nome</label
+            >
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="João da Silva"
+              required
+            />
+            <div
+              *ngIf="
+                signupForm.get('name')?.invalid &&
+                signupForm.get('name')?.touched
+              "
+              class="text-red-500 text-xs"
+            >
+              <div *ngIf="signupForm.get('name')?.errors?.['required']">
+                O nome é obrigatório
+              </div>
+              <div *ngIf="signupForm.get('name')?.errors?.['minlength']">
+                O nome deve ter pelo menos 3 caracteres
+              </div>
+            </div>
+          </div>
+
+          <!-- Campo de email -->
+          <div>
+            <label for="email" class="block mb-2 text-sm font-medium text-white"
+              >Seu e-mail</label
+            >
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="nome@empresa.com"
+              required
+            />
+            <div
+              *ngIf="
+                signupForm.get('email')?.invalid &&
+                signupForm.get('email')?.touched
+              "
+              class="text-red-500 text-xs"
+            >
+              <div *ngIf="signupForm.get('email')?.errors?.['required']">
+                O e-mail é obrigatório
+              </div>
+              <div *ngIf="signupForm.get('email')?.errors?.['email']">
+                Por favor, insira um e-mail válido
+              </div>
+            </div>
+          </div>
+
+          <!-- Campo de senha -->
+          <div>
+            <label
+              for="password"
+              class="block mb-2 text-sm font-medium text-white"
+              >Senha</label
+            >
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+              class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="••••••••"
+              required
+            />
+            <div
+              *ngIf="
+                signupForm.get('password')?.invalid &&
+                signupForm.get('password')?.touched
+              "
+              class="text-red-500 text-xs"
+            >
+              <div *ngIf="signupForm.get('password')?.errors?.['required']">
+                A senha é obrigatória
+              </div>
+              <div *ngIf="signupForm.get('password')?.errors?.['minlength']">
+                A senha deve ter pelo menos 4 caracteres
+              </div>
+            </div>
+          </div>
+
+          <!-- Campo de endereço -->
+          <div>
+            <label
+              for="address"
+              class="block mb-2 text-sm font-medium text-white"
+              >Seu endereço</label
+            >
+            <input
+              type="text"
+              id="address"
+              formControlName="address"
+              class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder="Seu Endereço"
+              required
+            />
+            <div
+              *ngIf="
+                signupForm.get('address')?.invalid &&
+                signupForm.get('address')?.touched
+              "
+              class="text-red-500 text-xs"
+            >
+              <div *ngIf="signupForm.get('address')?.errors?.['required']">
+                O endereço é obrigatório
+              </div>
+              <div *ngIf="signupForm.get('address')?.errors?.['minlength']">
+                O endereço deve ter pelo menos 5 caracteres
+              </div>
+            </div>
+          </div>
+
+          <!-- Caixa de Termos e Condições -->
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <input
+                id="terms"
+                type="checkbox"
+                formControlName="terms"
+                class="w-4 h-4 border border-gray-600 rounded bg-gray-700 focus:ring-3 focus:ring-primary-600 dark:ring-offset-gray-800"
+                required
+              />
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="terms" class="font-light text-gray-300">
+                Eu aceito os
+                <a class="font-medium text-primary-500 hover:underline"
+                  >Termos e Condições</a
+                >
+              </label>
+            </div>
+          </div>
+
+          <!-- Botão de Enviar -->
+          <button
+            type="submit"
+            [disabled]="signupForm.invalid"
+            class="w-full text-white bg-slate-500 hover:bg-slate-600 focus:ring-4 focus:outline-none focus:ring-primary-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:cursor-not-allowed"
+          >
+            Criar uma conta
+          </button>
+
+          <!-- Botão para ir para Login -->
+          <p class="text-sm font-light text-gray-400">
+            Já tem uma conta?
+            <a routerLink="/login" class="text-gray-300 :underline"
+              >Faça login</a
+            >
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

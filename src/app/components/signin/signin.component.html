@@ -1,0 +1,112 @@
+<section class="bg-gray-900">
+  <div
+    class="flex flex-col items-center justify-center w-full min-h-screen px-6 py-8 mx-auto sm:px-8 lg:px-10"
+  >
+    <a
+      href="#"
+      class="flex items-center mb-6 text-2xl font-semibold text-white"
+    >
+      <img
+        class="h-auto w-auto max-w-full sm:max-w-xs md:max-w-sm"
+        src="/assets/logo.svg"
+        alt="logo"
+      />
+    </a>
+    <div
+      class="w-full max-w-md sm:max-w-lg lg:max-w-xl p-6 rounded-lg shadow-lg bg-gray-800 border-gray-700"
+    >
+      <div class="space-y-4 sm:space-y-6 p-8">
+        <h1
+          class="text-xl font-bold leading-tight tracking-tight md:text-2xl text-white"
+        >
+          Faça login na sua conta
+        </h1>
+        <form
+          [formGroup]="signinForm"
+          (ngSubmit)="onSubmit()"
+          class="space-y-4 md:space-y-6"
+        >
+          <div>
+            <label for="email" class="block mb-2 text-sm font-medium text-white"
+              >Seu email</label
+            >
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="border text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+              placeholder="nome@empresa.com"
+              required
+            />
+            <div
+              *ngIf="
+                signinForm.get('email')?.invalid &&
+                signinForm.get('email')?.touched
+              "
+              class="text-red-500 text-xs"
+            >
+              <div *ngIf="signinForm.get('email')?.errors?.['required']">
+                O email é obrigatório
+              </div>
+              <div *ngIf="signinForm.get('email')?.errors?.['email']">
+                Por favor, insira um email válido
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="password"
+              class="block mb-2 text-sm font-medium text-white"
+              >Senha</label
+            >
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+              class="border text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+              placeholder="••••••••"
+              required
+            />
+            <div
+              *ngIf="
+                signinForm.get('password')?.invalid &&
+                signinForm.get('password')?.touched
+              "
+              class="text-red-500 text-xs"
+            >
+              <div *ngIf="signinForm.get('password')?.errors?.['required']">
+                A senha é obrigatória
+              </div>
+              <div *ngIf="signinForm.get('password')?.errors?.['minlength']">
+                A senha deve ter pelo menos 4 caracteres
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <a
+              class="text-sm font-medium text-primary-600 hover:underline text-primary-500"
+              >Esqueceu a senha?</a
+            >
+          </div>
+
+          <button
+            type="submit"
+            [disabled]="signinForm.invalid"
+            class="w-full text-white border-white bg-slate-500 hover:bg-slate-700 focus:ring-4 disabled:cursor-not-allowed focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-primary-600 hover:bg-primary-700 focus:ring-primary-800"
+          >
+            Entrar
+          </button>
+
+          <p class="text-sm font-light text-gray-400">
+            Não tem uma conta?
+            <a routerLink="/signup" class="text-gray-300 hover:underline"
+              >Cadastre-se</a
+            >
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,79 @@
+<div *ngIf="cartItems.length > 0; else emptyCart">
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-2"
+  >
+    <div
+      *ngFor="let item of cartItems"
+      class="card bg-gray-700 text-zinc-100 shadow-lg rounded-lg p-4"
+      tabindex="0"
+    >
+      <a [routerLink]="['/infoDetails', item.productId]">
+        <figure class="flex justify-center">
+          <img
+            [src]="item.imageUrl"
+            class="h-40 w-40 object-cover rounded-md"
+            alt="{{ item.description }}"
+          />
+        </figure>
+      </a>
+
+      <div class="card-body flex flex-col justify-between">
+        <h2 class="text-lg font-semibold truncate">
+          {{ item.name | titlecase }}
+        </h2>
+        <p class="text-sm text-zinc-50 truncate">{{ item.description }}</p>
+
+        <div class="flex items-center justify-between mt-4">
+          <span class="text-lg font-medium text-sky-500">
+            {{ item.price | currency : "BRL" }}
+          </span>
+          <div class="flex items-center gap-4">
+            <button
+              class="btn btn-sm btn-warning px-3"
+              (click)="decreaseQuantity(item)"
+              aria-label="Diminuir quantidade"
+            >
+              -
+            </button>
+            <span class="text-lg font-medium">{{ item.quantity }}</span>
+            <button
+              class="btn btn-sm btn-success px-3"
+              (click)="increaseQuantity(item)"
+              aria-label="Aumentar quantidade"
+            >
+              +
+            </button>
+          </div>
+        </div>
+
+        <p class="text-sm text-gray-500 mt-2">
+          Total: <strong>{{ getItemTotal(item) | currency : "BRL" }}</strong>
+        </p>
+
+        <div class="flex justify-between mt-4">
+          <button class="btn btn-error btn-sm" (click)="removeFromCart(item)">
+            Remover
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-center mt-10 mb-20">
+    <button
+      class="btn btn-success text-lg px-8 py-3"
+      (click)="finalizePurchase()"
+      [disabled]="cartItems.length === 0"
+    >
+      Finalizar Compra ({{ getTotalPrice() | currency : "BRL" }})
+    </button>
+  </div>
+</div>
+
+<ng-template #emptyCart>
+  <div class="text-center p-10 text-zinc-100">
+    <h2 class="text-2xl font-semibold">Seu carrinho está vazio! 🛒</h2>
+    <p class="mt-2">Adicione alguns produtos para continuar.</p>
+    <a routerLink="/" class="btn btn-primary mt-4">Ver produtos</a>
+  </div>
+</ng-template>
