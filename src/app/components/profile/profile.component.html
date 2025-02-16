@@ -1,0 +1,35 @@
+<div class="max-w-md mx-auto bg-slate-600 p-6 rounded-lg shadow-md">
+  <h2 class="text-2xl font-semibold mb-4">Perfil do Usuário</h2>
+
+  <div *ngIf="loading">Carregando...</div>
+
+  <div *ngIf="!loading && !editMode">
+    <p><strong>Nome:</strong> {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Endereço:</strong> {{ user.address }}</p>
+
+    <button class="btn btn-primary mt-4" (click)="toggleEdit()">Editar</button>
+  </div>
+
+  <div *ngIf="!loading && editMode">
+    <label class="block mb-2">Nome</label>
+    <input class="input input-bordered w-full mb-2" [(ngModel)]="user.name" />
+
+    <label class="block mb-2">Email</label>
+    <input class="input input-bordered w-full mb-2" [(ngModel)]="user.email" />
+
+    <label class="block mb-2">Endereço</label>
+    <input
+      class="input input-bordered w-full mb-4"
+      [(ngModel)]="user.address"
+    />
+    <label class="block mb-2">Senha</label>
+    <input
+      class="input input-bordered w-full mb-2"
+      [(ngModel)]="user.password"
+    />
+
+    <button class="btn btn-success mr-2" (click)="saveChanges()">Salvar</button>
+    <button class="btn btn-error" (click)="toggleEdit()">Cancelar</button>
+  </div>
+</div>

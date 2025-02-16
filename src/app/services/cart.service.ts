@@ -14,7 +14,7 @@ export class CartService {
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('authToken');
     if (!token) {
-      console.warn('⚠️ Nenhum token JWT encontrado!');
+      console.warn('Nenhum token JWT encontrado!');
       return new HttpHeaders();
     }
 
