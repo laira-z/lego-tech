@@ -60,7 +60,7 @@
     </div>
   </div>
   <div #toastContainer class="toast toast-top toast-end">
-    <div *ngIf="toastMessage" class="alert alert-success">
+    <div *ngIf="toastMessage()" class="alert alert-success">
       <span>{{ toastMessage() }}</span>
     </div>
   </div>

@@ -1,13 +1,13 @@
 <div *ngIf="cartItems.length > 0; else emptyCart">
   <div
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-2"
   >
     <div
       *ngFor="let item of cartItems"
       class="card bg-gray-700 text-zinc-100 shadow-lg rounded-lg p-4"
       tabindex="0"
     >
-      <a [routerLink]="['/infoDetails', item.productId]" class="block">
+      <a [routerLink]="['/infoDetails', item.productId]">
         <figure class="flex justify-center">
           <img
             [src]="item.imageUrl"

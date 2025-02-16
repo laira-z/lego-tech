@@ -12,8 +12,9 @@
         alt="logo"
       />
     </a>
+    <!-- Card agora ocupa 100% da largura disponível e se adapta dinamicamente -->
     <div
-      class="w-full max-w-md p-6 bg-gray-800 rounded-lg shadow-lg border-gray-700"
+      class="w-full max-w-lg sm:max-w-md p-6 bg-gray-800 rounded-lg shadow-lg border-gray-700"
     >
       <div class="space-y-4 sm:space-y-6 p-8">
         <h1
@@ -26,6 +27,7 @@
           (ngSubmit)="onSubmit()"
           class="space-y-4 md:space-y-6"
         >
+          <!-- Campo de nome -->
           <div>
             <label for="name" class="block mb-2 text-sm font-medium text-white"
               >Seu nome</label
@@ -48,9 +50,13 @@
               <div *ngIf="signupForm.get('name')?.errors?.['required']">
                 O nome é obrigatório
               </div>
+              <div *ngIf="signupForm.get('name')?.errors?.['minlength']">
+                O nome deve ter pelo menos 3 caracteres
+              </div>
             </div>
           </div>
 
+          <!-- Campo de email -->
           <div>
             <label for="email" class="block mb-2 text-sm font-medium text-white"
               >Seu e-mail</label
@@ -79,6 +85,7 @@
             </div>
           </div>
 
+          <!-- Campo de senha -->
           <div>
             <label
               for="password"
@@ -109,7 +116,7 @@
             </div>
           </div>
 
-          <!-- Campo de Endereço -->
+          <!-- Campo de endereço -->
           <div>
             <label
               for="address"
@@ -133,6 +140,9 @@
             >
               <div *ngIf="signupForm.get('address')?.errors?.['required']">
                 O endereço é obrigatório
+              </div>
+              <div *ngIf="signupForm.get('address')?.errors?.['minlength']">
+                O endereço deve ter pelo menos 5 caracteres
               </div>
             </div>
           </div>
