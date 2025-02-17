@@ -19,7 +19,6 @@ export class PurchaseService {
     return new HttpHeaders({ Authorization: `Bearer ${token}` });
   }
 
-  // Função para obter as compras do usuário autenticado
   getPurchases(): Observable<any> {
     const headers = this.getAuthHeaders();
     return this.http.get<any>(`${this.apiUrl}/purchases`, { headers });

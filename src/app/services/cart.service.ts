@@ -37,7 +37,7 @@ export class CartService {
     const headers = this.getAuthHeaders();
     // Atualiza a quantidade localmente
     const currentQuantity = this.cartQuantitySubject.value;
-    this.cartQuantitySubject.next(currentQuantity + quantity); // Atualiza o valor no BehaviorSubject
+    this.cartQuantitySubject.next(currentQuantity + quantity);
 
     return this.http.post<{ message: string }>(
       `${this.baseUrl}/cart/add`,

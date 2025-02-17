@@ -32,7 +32,6 @@ export class CardItemComponent {
     this.cartService.addToCart(productId, quantity).subscribe({
       next: (response) => {
         console.log('Produto adicionado ao carrinho:', response.message);
-        ('Item adicionado ao carrinho:');
         this.toastMessage.set('Item adicionado ao carrinho!');
 
         this.showToast();
