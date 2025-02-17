@@ -4,6 +4,9 @@
 
 O frontend da aplicação foi desenvolvido com Angular e o backend foi feito em Nodejs e esta hospedado em https://legotech.koyeb.app/
 
+## Link video youtube:
+https://youtu.be/HAAj_X9d6pc
+
 ## Endereço de Deploy - GitHub Pages
 
 https://lego-tech.vercel.app
